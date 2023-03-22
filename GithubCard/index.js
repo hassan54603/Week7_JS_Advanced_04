@@ -5,6 +5,26 @@
     https://api.github.com/users/<your name>
 */
 
+const followersArray = ['duraanali', 'gabischool', 'clementmihailescu','freeCodeCamp','CleverProgrammer','Abdifatahz', 'kubowania', 'mchamoudadev', 'jamaaldev', 'developedbyed']
+followersArray.forEach(items =>{
+  axios.get(`https://api.github.com/users/${items}`)
+  .then((response) => {
+  console.log(response.data)
+  const image = response.data.avatar_url;
+  const name = response.data.name;
+  const login = response.data.login;
+  const location = response.data.location;
+  const html_url = response.data.html_url;
+  const followers = response.data.followers;
+  const following = response.data.following;
+  const bio = response.data.bio;
+  const user = user1(image, name, login, location, html_url, followers, following,bio)
+   
+})
+.catch (error => {
+  console.log(error)
+})
+})
 
 
 /*
@@ -34,6 +54,25 @@
       </div>
     </div>
 */
+const cards = document.querySelector('.cards')
+const user1 = (image, name , username, location, link, follow, followers, bio) =>{
+
+  return cards.innerHTML += `
+  <div class="card">
+    <img src=${image} />
+    <div class="card-info">
+      <h3 class="name">${name}</h3>
+      <p class="username">${username}</p>
+      <p>Location: ${location}</p>
+      <p>Profile: 
+      <a href=${link}>${link}</a>
+      </p>
+      <p>Followers: ${followers}</p>
+      <p>Following: ${follow}</p>
+      <p>Bio: ${bio}</p>
+      </div>
+  </div> `
+}
 
 
 
@@ -51,5 +90,5 @@
     Using that array, iterate over it, requesting data for each user, creating a new card for each user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+
 
